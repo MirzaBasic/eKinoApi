@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="eKinoModelStoreContainer" CdmEntityContainer="eKinoEntities">
+    <EntitySetMapping Name="Filmovis">
+      <EntityTypeMapping TypeName="eKinoModel.Filmovi">
+        <MappingFragment StoreEntitySet="Filmovi">
+          <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Glumci" ColumnName="Glumci" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+          <ScalarProperty Name="Akrivan" ColumnName="Akrivan" />
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+          <ScalarProperty Name="DatumModifikacije" ColumnName="DatumModifikacije" />
+          <ScalarProperty Name="IMDBOcjena" ColumnName="IMDBOcjena" />
+          <ScalarProperty Name="Ocjena" ColumnName="Ocjena" />
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Korisnicis">
+      <EntityTypeMapping TypeName="eKinoModel.Korisnici">
+        <MappingFragment StoreEntitySet="Korisnici">
+          <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+          <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+          <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Spol" ColumnName="Spol" />
+          <ScalarProperty Name="DatumRegistracije" ColumnName="DatumRegistracije" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Aktivan" ColumnName="Aktivan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KorisniciUloges">
+      <EntityTypeMapping TypeName="eKinoModel.KorisniciUloge">
+        <MappingFragment StoreEntitySet="KorisniciUloge">
+          <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+          <ScalarProperty Name="UlogaID" ColumnName="UlogaID" />
+          <ScalarProperty Name="DatumIzmjene" ColumnName="DatumIzmjene" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ocjenes">
+      <EntityTypeMapping TypeName="eKinoModel.Ocjene">
+        <MappingFragment StoreEntitySet="Ocjene">
+          <ScalarProperty Name="Ocjena" ColumnName="Ocjena" />
+          <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+          <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="eKinoModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Uloges">
+      <EntityTypeMapping TypeName="eKinoModel.Uloge">
+        <MappingFragment StoreEntitySet="Uloge">
+          <ScalarProperty Name="UlogaID" ColumnName="UlogaID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="Opis" ColumnName="Opis" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zanrovis">
+      <EntityTypeMapping TypeName="eKinoModel.Zanrovi">
+        <MappingFragment StoreEntitySet="Zanrovi">
+          <ScalarProperty Name="ZanrID" ColumnName="ZanrID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ZanroviFilmova" TypeName="eKinoModel.ZanroviFilmova" StoreEntitySet="ZanroviFilmova">
+      <EndProperty Name="Filmovi">
+        <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+      </EndProperty>
+      <EndProperty Name="Zanrovi">
+        <ScalarProperty Name="ZanrID" ColumnName="ZanrID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="asp_KomentariGetByFilmID" FunctionName="eKinoModel.Store.asp_KomentariGetByFilmID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eKinoModel.KomentariVM">
+          <ScalarProperty Name="Komentar" ColumnName="Komentar" />
+          <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+          <ScalarProperty Name="KomentarID" ColumnName="KomentarID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asp_OcjeneGetByFilmID" FunctionName="eKinoModel.Store.asp_OcjeneGetByFilmID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eKinoModel.OcjeneVM">
+          <ScalarProperty Name="Ocjena" ColumnName="Ocjena" />
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+          <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="asp_ZanroviGetByFilmID" FunctionName="eKinoModel.Store.asp_ZanroviGetByFilmID" />
+    <EntitySetMapping Name="Danis">
+      <EntityTypeMapping TypeName="eKinoModel.Dani">
+        <MappingFragment StoreEntitySet="Dani">
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="DanID" ColumnName="DanID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projekcijes">
+      <EntityTypeMapping TypeName="eKinoModel.Projekcije">
+        <MappingFragment StoreEntitySet="Projekcije">
+          <ScalarProperty Name="Aktivna" ColumnName="Aktivna" />
+          <ScalarProperty Name="Vrijeme" ColumnName="Vrijeme" />
+          <ScalarProperty Name="DanID" ColumnName="DanID" />
+          <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+          <ScalarProperty Name="TipProjekcijeID" ColumnName="TipProjekcijeID" />
+          <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+          <ScalarProperty Name="ProjekcijaID" ColumnName="ProjekcijaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipProjekcijes">
+      <EntityTypeMapping TypeName="eKinoModel.TipProjekcije">
+        <MappingFragment StoreEntitySet="TipProjekcije">
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="TipID" ColumnName="TipID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="asp_SelectAktivneProjekcije" FunctionName="eKinoModel.Store.asp_SelectAktivneProjekcije" />
+    <FunctionImportMapping FunctionImportName="asp_SelectAktivneProjekcijeByFilmID" FunctionName="eKinoModel.Store.asp_SelectAktivneProjekcijeByFilmID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eKinoModel.ProjekcijeVM">
+          <ScalarProperty Name="ProjekcijaID" ColumnName="ProjekcijaID" />
+          <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+          <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+          <ScalarProperty Name="Vrijeme" ColumnName="Vrijeme" />
+          <ScalarProperty Name="NazivFilma" ColumnName="NazivFilma" />
+          <ScalarProperty Name="TipProjekcije" ColumnName="TipProjekcije" />
+          <ScalarProperty Name="Dan" ColumnName="Dan" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Komentaris">
+      <EntityTypeMapping TypeName="eKinoModel.Komentari">
+        <MappingFragment StoreEntitySet="Komentari">
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+          <ScalarProperty Name="KomentarKomentaraID" ColumnName="KomentarKomentaraID" />
+          <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+          <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+          <ScalarProperty Name="Komentar" ColumnName="Komentar" />
+          <ScalarProperty Name="KomentarID" ColumnName="KomentarID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="aps_GetKomentariKomentara" FunctionName="eKinoModel.Store.aps_GetKomentariKomentara">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eKinoModel.KomentariVM">
+          <ScalarProperty Name="Komentar" ColumnName="Komentar" />
+          <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+          <ScalarProperty Name="KomentarID" ColumnName="KomentarID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Rezervacijes">
+      <EntityTypeMapping TypeName="eKinoModel.Rezervacije">
+        <MappingFragment StoreEntitySet="Rezervacije">
+          <ScalarProperty Name="Otkazano" ColumnName="Otkazano" />
+          <ScalarProperty Name="DatumRezervacije" ColumnName="DatumRezervacije" />
+          <ScalarProperty Name="SjedisteID" ColumnName="SjedisteID" />
+          <ScalarProperty Name="ProjekcijaID" ColumnName="ProjekcijaID" />
+          <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+          <ScalarProperty Name="RezervacijaID" ColumnName="RezervacijaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sjedistas">
+      <EntityTypeMapping TypeName="eKinoModel.Sjedista">
+        <MappingFragment StoreEntitySet="Sjedista">
+          <ScalarProperty Name="BrojSjedista" ColumnName="BrojSjedista" />
+          <ScalarProperty Name="Red" ColumnName="Red" />
+          <ScalarProperty Name="SjedisteID" ColumnName="SjedisteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="asp_RezervacijeInsert" FunctionName="eKinoModel.Store.asp_RezervacijeInsert" />
+    <FunctionImportMapping FunctionImportName="asp_GetRezervacijeByKorisnikID" FunctionName="eKinoModel.Store.asp_GetRezervacijeByKorisnikID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="eKinoModel.RezervacijeVM">
+          <ScalarProperty Name="RezervacijaID" ColumnName="RezervacijaID" />
+          <ScalarProperty Name="ProjekcijaID" ColumnName="ProjekcijaID" />
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
+          <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+          <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+          <ScalarProperty Name="DatumRezervacije" ColumnName="DatumRezervacije" />
+          <ScalarProperty Name="Red" ColumnName="Red" />
+          <ScalarProperty Name="BrojSjedista" ColumnName="BrojSjedista" />
+          <ScalarProperty Name="NazivFilma" ColumnName="NazivFilma" />
+          <ScalarProperty Name="TipProjekcije" ColumnName="TipProjekcije" />
+          <ScalarProperty Name="Dan" ColumnName="Dan" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetZauzetaSjedistaByProjekcijaID" FunctionName="eKinoModel.Store.usp_GetZauzetaSjedistaByProjekcijaID" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="eKinoModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="eKinoModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="eKinoModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="eKinoModel.Store.sp_helpdiagramdefinition" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="eKinoModel.Store.sp_helpdiagrams" />
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="eKinoModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="eKinoModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="asp_KorisnikInsert" FunctionName="eKinoModel.Store.asp_KorisnikInsert" />
+    <FunctionImportMapping FunctionImportName="asp_DeleteRezervacija" FunctionName="eKinoModel.Store.asp_DeleteRezervacija" />
+    <FunctionImportMapping FunctionImportName="asp_DodajKomentar" FunctionName="eKinoModel.Store.asp_DodajKomentar" />
+    <FunctionImportMapping FunctionImportName="asp_KomentarInsert" FunctionName="eKinoModel.Store.asp_KomentarInsert" />
+    <FunctionImportMapping FunctionImportName="asp_SelectAktivneProjekcijeByNaziv" FunctionName="eKinoModel.Store.asp_SelectAktivneProjekcijeByNaziv" />
+    <FunctionImportMapping FunctionImportName="asp_SelectTopAktivneProjekcije" FunctionName="eKinoModel.Store.asp_SelectTopAktivneProjekcije" />
+    <FunctionImportMapping FunctionImportName="asp_KorisniciUpdate" FunctionName="eKinoModel.Store.asp_KorisniciUpdate" />
+    <FunctionImportMapping FunctionImportName="asp_FilmInsert" FunctionName="eKinoModel.Store.asp_FilmInsert" />
+    <EntitySetMapping Name="Novostis">
+      <EntityTypeMapping TypeName="eKinoModel.Novosti">
+        <MappingFragment StoreEntitySet="Novosti">
+          <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+          <ScalarProperty Name="Aktivno" ColumnName="Aktivno" />
+          <ScalarProperty Name="Sadrzaj" ColumnName="Sadrzaj" />
+          <ScalarProperty Name="Naslov" ColumnName="Naslov" />
+          <ScalarProperty Name="Slika" ColumnName="Slika" />
+          <ScalarProperty Name="NovostID" ColumnName="NovostID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

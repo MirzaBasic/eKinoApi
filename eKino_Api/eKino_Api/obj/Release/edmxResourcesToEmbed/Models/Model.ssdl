@@ -1,0 +1,491 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="eKinoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Dani">
+    <Key>
+      <PropertyRef Name="DanID" />
+    </Key>
+    <Property Name="DanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Filmovi">
+    <Key>
+      <PropertyRef Name="FilmID" />
+    </Key>
+    <Property Name="FilmID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Glumci" Type="text" />
+    <Property Name="Opis" Type="text" />
+    <Property Name="Akrivan" Type="bit" Nullable="false" />
+    <Property Name="DatumKreiranja" Type="datetime" Nullable="false" />
+    <Property Name="DatumModifikacije" Type="datetime" Nullable="false" />
+    <Property Name="IMDBOcjena" Type="float" Nullable="false" />
+    <Property Name="Ocjena" Type="float" Nullable="false" />
+    <Property Name="Slika" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Komentari">
+    <Key>
+      <PropertyRef Name="KomentarID" />
+    </Key>
+    <Property Name="KomentarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Komentar" Type="text" Nullable="false" />
+    <Property Name="KorisnikID" Type="int" Nullable="false" />
+    <Property Name="FilmID" Type="int" Nullable="false" />
+    <Property Name="KomentarKomentaraID" Type="int" />
+    <Property Name="DatumKreiranja" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Korisnici">
+    <Key>
+      <PropertyRef Name="KorisnikID" />
+    </Key>
+    <Property Name="KorisnikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KorisnickoIme" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Lozinka" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Ime" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Prezime" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Spol" Type="nvarchar" MaxLength="1" />
+    <Property Name="DatumRegistracije" Type="date" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Aktivan" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KorisniciUloge">
+    <Key>
+      <PropertyRef Name="KorisnikID" />
+      <PropertyRef Name="UlogaID" />
+    </Key>
+    <Property Name="KorisnikID" Type="int" Nullable="false" />
+    <Property Name="UlogaID" Type="int" Nullable="false" />
+    <Property Name="DatumIzmjene" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Novosti">
+    <Key>
+      <PropertyRef Name="NovostID" />
+    </Key>
+    <Property Name="NovostID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Slika" Type="varbinary(max)" />
+    <Property Name="Naslov" Type="nvarchar" MaxLength="100" />
+    <Property Name="Sadrzaj" Type="text" />
+    <Property Name="Aktivno" Type="bit" />
+    <Property Name="DatumKreiranja" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Ocjene">
+    <Key>
+      <PropertyRef Name="KorisnikID" />
+      <PropertyRef Name="FilmID" />
+    </Key>
+    <Property Name="Ocjena" Type="int" Nullable="false" />
+    <Property Name="KorisnikID" Type="int" Nullable="false" />
+    <Property Name="FilmID" Type="int" Nullable="false" />
+    <Property Name="DatumKreiranja" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Projekcije">
+    <Key>
+      <PropertyRef Name="ProjekcijaID" />
+    </Key>
+    <Property Name="ProjekcijaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FilmID" Type="int" />
+    <Property Name="TipProjekcijeID" Type="int" />
+    <Property Name="Cijena" Type="float" />
+    <Property Name="DanID" Type="int" />
+    <Property Name="Vrijeme" Type="time" Precision="7" />
+    <Property Name="Aktivna" Type="bit" />
+  </EntityType>
+  <EntityType Name="Rezervacije">
+    <Key>
+      <PropertyRef Name="RezervacijaID" />
+    </Key>
+    <Property Name="RezervacijaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KorisnikID" Type="int" />
+    <Property Name="ProjekcijaID" Type="int" />
+    <Property Name="SjedisteID" Type="int" />
+    <Property Name="DatumRezervacije" Type="datetime" />
+    <Property Name="Otkazano" Type="bit" />
+  </EntityType>
+  <EntityType Name="Sjedista">
+    <Key>
+      <PropertyRef Name="SjedisteID" />
+    </Key>
+    <Property Name="SjedisteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Red" Type="nvarchar" MaxLength="1" />
+    <Property Name="BrojSjedista" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TipProjekcije">
+    <Key>
+      <PropertyRef Name="TipID" />
+    </Key>
+    <Property Name="TipID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Uloge">
+    <Key>
+      <PropertyRef Name="UlogaID" />
+    </Key>
+    <Property Name="UlogaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Opis" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Zanrovi">
+    <Key>
+      <PropertyRef Name="ZanrID" />
+    </Key>
+    <Property Name="ZanrID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="ZanroviFilmova">
+    <Key>
+      <PropertyRef Name="ZanrID" />
+      <PropertyRef Name="FilmID" />
+    </Key>
+    <Property Name="ZanrID" Type="int" Nullable="false" />
+    <Property Name="FilmID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Komentari__FilmI__151B244E">
+    <End Role="Filmovi" Type="Self.Filmovi" Multiplicity="1" />
+    <End Role="Komentari" Type="Self.Komentari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filmovi">
+        <PropertyRef Name="FilmID" />
+      </Principal>
+      <Dependent Role="Komentari">
+        <PropertyRef Name="FilmID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Komentari__Koris__160F4887">
+    <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="1" />
+    <End Role="Komentari" Type="Self.Komentari" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnici">
+        <PropertyRef Name="KorisnikID" />
+      </Principal>
+      <Dependent Role="Komentari">
+        <PropertyRef Name="KorisnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Korisnici__Koris__2A4B4B5E">
+    <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="1" />
+    <End Role="KorisniciUloge" Type="Self.KorisniciUloge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnici">
+        <PropertyRef Name="KorisnikID" />
+      </Principal>
+      <Dependent Role="KorisniciUloge">
+        <PropertyRef Name="KorisnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Korisnici__Uloga__2B3F6F97">
+    <End Role="Uloge" Type="Self.Uloge" Multiplicity="1" />
+    <End Role="KorisniciUloge" Type="Self.KorisniciUloge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uloge">
+        <PropertyRef Name="UlogaID" />
+      </Principal>
+      <Dependent Role="KorisniciUloge">
+        <PropertyRef Name="UlogaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ocjene__FilmID__32E0915F">
+    <End Role="Filmovi" Type="Self.Filmovi" Multiplicity="1" />
+    <End Role="Ocjene" Type="Self.Ocjene" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filmovi">
+        <PropertyRef Name="FilmID" />
+      </Principal>
+      <Dependent Role="Ocjene">
+        <PropertyRef Name="FilmID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ocjene__Korisnik__31EC6D26">
+    <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="1" />
+    <End Role="Ocjene" Type="Self.Ocjene" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnici">
+        <PropertyRef Name="KorisnikID" />
+      </Principal>
+      <Dependent Role="Ocjene">
+        <PropertyRef Name="KorisnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projekcij__DanID__76969D2E">
+    <End Role="Dani" Type="Self.Dani" Multiplicity="0..1" />
+    <End Role="Projekcije" Type="Self.Projekcije" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dani">
+        <PropertyRef Name="DanID" />
+      </Principal>
+      <Dependent Role="Projekcije">
+        <PropertyRef Name="DanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projekcij__FilmI__74AE54BC">
+    <End Role="Filmovi" Type="Self.Filmovi" Multiplicity="0..1" />
+    <End Role="Projekcije" Type="Self.Projekcije" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filmovi">
+        <PropertyRef Name="FilmID" />
+      </Principal>
+      <Dependent Role="Projekcije">
+        <PropertyRef Name="FilmID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Projekcij__TipPr__75A278F5">
+    <End Role="TipProjekcije" Type="Self.TipProjekcije" Multiplicity="0..1" />
+    <End Role="Projekcije" Type="Self.Projekcije" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipProjekcije">
+        <PropertyRef Name="TipID" />
+      </Principal>
+      <Dependent Role="Projekcije">
+        <PropertyRef Name="TipProjekcijeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Rezervaci__Koris__282DF8C2">
+    <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="0..1" />
+    <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Korisnici">
+        <PropertyRef Name="KorisnikID" />
+      </Principal>
+      <Dependent Role="Rezervacije">
+        <PropertyRef Name="KorisnikID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Rezervaci__Proje__29221CFB">
+    <End Role="Projekcije" Type="Self.Projekcije" Multiplicity="0..1" />
+    <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projekcije">
+        <PropertyRef Name="ProjekcijaID" />
+      </Principal>
+      <Dependent Role="Rezervacije">
+        <PropertyRef Name="ProjekcijaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Rezervaci__Sjedi__2A164134">
+    <End Role="Sjedista" Type="Self.Sjedista" Multiplicity="0..1" />
+    <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sjedista">
+        <PropertyRef Name="SjedisteID" />
+      </Principal>
+      <Dependent Role="Rezervacije">
+        <PropertyRef Name="SjedisteID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ZanroviFi__FilmI__15502E78">
+    <End Role="Filmovi" Type="Self.Filmovi" Multiplicity="1" />
+    <End Role="ZanroviFilmova" Type="Self.ZanroviFilmova" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Filmovi">
+        <PropertyRef Name="FilmID" />
+      </Principal>
+      <Dependent Role="ZanroviFilmova">
+        <PropertyRef Name="FilmID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ZanroviFi__ZanrI__145C0A3F">
+    <End Role="Zanrovi" Type="Self.Zanrovi" Multiplicity="1" />
+    <End Role="ZanroviFilmova" Type="Self.ZanroviFilmova" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Zanrovi">
+        <PropertyRef Name="ZanrID" />
+      </Principal>
+      <Dependent Role="ZanroviFilmova">
+        <PropertyRef Name="ZanrID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="aps_GetKomentariKomentara" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="KomentarID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="asp_DeleteRezervacija" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RezervacijaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="asp_DodajKomentar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Komentar" Type="text" Mode="In" />
+    <Parameter Name="KorisnikID" Type="int" Mode="In" />
+    <Parameter Name="FilmID" Type="int" Mode="In" />
+    <Parameter Name="KomentarKomentaraID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="asp_FilmInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+    <Parameter Name="Slika" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="asp_GetRezervacijeByKorisnikID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="KorisnikID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="asp_KomentarInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Komentar" Type="text" Mode="In" />
+    <Parameter Name="KorisnikID" Type="int" Mode="In" />
+    <Parameter Name="FilmID" Type="int" Mode="In" />
+    <Parameter Name="KomentarKomentaraID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="asp_KomentariGetByFilmID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FilmID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="asp_KorisniciUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="KorisnikID" Type="int" Mode="In" />
+    <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+    <Parameter Name="Ime" Type="nvarchar" Mode="In" />
+    <Parameter Name="Prezime" Type="nvarchar" Mode="In" />
+    <Parameter Name="Spol" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+    <Parameter Name="Lozinka" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="asp_KorisnikInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+    <Parameter Name="Lozinka" Type="nvarchar" Mode="In" />
+    <Parameter Name="Ime" Type="nvarchar" Mode="In" />
+    <Parameter Name="Prezime" Type="nvarchar" Mode="In" />
+    <Parameter Name="Spol" Type="nvarchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="asp_OcjeneGetByFilmID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FilmID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="asp_RezervacijeInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="KorisnikID" Type="int" Mode="In" />
+    <Parameter Name="ProjekcijaID" Type="int" Mode="In" />
+    <Parameter Name="SjedisteID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="asp_SelectAktivneProjekcije" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="asp_SelectAktivneProjekcijeByFilmID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FilmID" Type="int" Mode="In" />
+    <Parameter Name="DanID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="asp_SelectAktivneProjekcijeByNaziv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="asp_SelectTopAktivneProjekcije" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="asp_ZanroviGetByFilmID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FilmID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_GetZauzetaSjedistaByProjekcijaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProjekcijaID" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="eKinoModelStoreContainer">
+    <EntitySet Name="Dani" EntityType="Self.Dani" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Filmovi" EntityType="Self.Filmovi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Komentari" EntityType="Self.Komentari" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Korisnici" EntityType="Self.Korisnici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KorisniciUloge" EntityType="Self.KorisniciUloge" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Novosti" EntityType="Self.Novosti" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ocjene" EntityType="Self.Ocjene" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Projekcije" EntityType="Self.Projekcije" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rezervacije" EntityType="Self.Rezervacije" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sjedista" EntityType="Self.Sjedista" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipProjekcije" EntityType="Self.TipProjekcije" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Uloge" EntityType="Self.Uloge" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Zanrovi" EntityType="Self.Zanrovi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ZanroviFilmova" EntityType="Self.ZanroviFilmova" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Komentari__FilmI__151B244E" Association="Self.FK__Komentari__FilmI__151B244E">
+      <End Role="Filmovi" EntitySet="Filmovi" />
+      <End Role="Komentari" EntitySet="Komentari" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Komentari__Koris__160F4887" Association="Self.FK__Komentari__Koris__160F4887">
+      <End Role="Korisnici" EntitySet="Korisnici" />
+      <End Role="Komentari" EntitySet="Komentari" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Korisnici__Koris__2A4B4B5E" Association="Self.FK__Korisnici__Koris__2A4B4B5E">
+      <End Role="Korisnici" EntitySet="Korisnici" />
+      <End Role="KorisniciUloge" EntitySet="KorisniciUloge" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Korisnici__Uloga__2B3F6F97" Association="Self.FK__Korisnici__Uloga__2B3F6F97">
+      <End Role="Uloge" EntitySet="Uloge" />
+      <End Role="KorisniciUloge" EntitySet="KorisniciUloge" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ocjene__FilmID__32E0915F" Association="Self.FK__Ocjene__FilmID__32E0915F">
+      <End Role="Filmovi" EntitySet="Filmovi" />
+      <End Role="Ocjene" EntitySet="Ocjene" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ocjene__Korisnik__31EC6D26" Association="Self.FK__Ocjene__Korisnik__31EC6D26">
+      <End Role="Korisnici" EntitySet="Korisnici" />
+      <End Role="Ocjene" EntitySet="Ocjene" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projekcij__DanID__76969D2E" Association="Self.FK__Projekcij__DanID__76969D2E">
+      <End Role="Dani" EntitySet="Dani" />
+      <End Role="Projekcije" EntitySet="Projekcije" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projekcij__FilmI__74AE54BC" Association="Self.FK__Projekcij__FilmI__74AE54BC">
+      <End Role="Filmovi" EntitySet="Filmovi" />
+      <End Role="Projekcije" EntitySet="Projekcije" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Projekcij__TipPr__75A278F5" Association="Self.FK__Projekcij__TipPr__75A278F5">
+      <End Role="TipProjekcije" EntitySet="TipProjekcije" />
+      <End Role="Projekcije" EntitySet="Projekcije" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Rezervaci__Koris__282DF8C2" Association="Self.FK__Rezervaci__Koris__282DF8C2">
+      <End Role="Korisnici" EntitySet="Korisnici" />
+      <End Role="Rezervacije" EntitySet="Rezervacije" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Rezervaci__Proje__29221CFB" Association="Self.FK__Rezervaci__Proje__29221CFB">
+      <End Role="Projekcije" EntitySet="Projekcije" />
+      <End Role="Rezervacije" EntitySet="Rezervacije" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Rezervaci__Sjedi__2A164134" Association="Self.FK__Rezervaci__Sjedi__2A164134">
+      <End Role="Sjedista" EntitySet="Sjedista" />
+      <End Role="Rezervacije" EntitySet="Rezervacije" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ZanroviFi__FilmI__15502E78" Association="Self.FK__ZanroviFi__FilmI__15502E78">
+      <End Role="Filmovi" EntitySet="Filmovi" />
+      <End Role="ZanroviFilmova" EntitySet="ZanroviFilmova" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ZanroviFi__ZanrI__145C0A3F" Association="Self.FK__ZanroviFi__ZanrI__145C0A3F">
+      <End Role="Zanrovi" EntitySet="Zanrovi" />
+      <End Role="ZanroviFilmova" EntitySet="ZanroviFilmova" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
